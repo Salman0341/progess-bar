@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
 
 /**
  * The save function defines the way in which the different attributes should
@@ -14,13 +14,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
-	return (
-		<p>
-			{ __(
-				'Progress Bar – hello from the saved content!',
-				'progress-bar'
-			) }
-		</p>
-	);
+function save(props) {
+	return <p className={props.className}>{props.attributes.content}</p>;
 }
+
+export default save;

@@ -3,7 +3,15 @@
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
+import { Fragment } from "@wordpress/element";
+import { InspectorControls } from "@wordpress/block-editor";
+
+/**
+ * Wordpress Components
+ */
+
+import { TextareaControl, PanelBody } from "@wordpress/components";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -11,7 +19,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss';
+import "./editor.scss";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -24,10 +32,25 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( { className } ) {
+
+function Edit(props) {
 	return (
-		<p className={ className }>
-			{ __( 'Progress Bar – hello from the editor!', 'progress-bar' ) }
-		</p>
+		<Fragment>
+			<p className={props.className}>{props.attributes.content}</p>
+
+			<InspectorControls>
+				<PanelBody title="General">
+					<TextareaControl
+						label="Content"
+						value={props.attributes.content}
+						onChange={(newContent) =>
+							props.setAttributes({ content: newContent })
+						}
+					/>
+				</PanelBody>
+			</InspectorControls>
+		</Fragment>
 	);
 }
+
+export default Edit;
