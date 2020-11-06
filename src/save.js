@@ -4,6 +4,8 @@
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
 import { __ } from "@wordpress/i18n";
+import { Fragment } from "@wordpress/element";
+
 
 /**
  * The save function defines the way in which the different attributes should
@@ -14,8 +16,36 @@ import { __ } from "@wordpress/i18n";
  *
  * @return {WPElement} Element to render.
  */
+
 function save(props) {
-	return <p className={props.className}>{props.attributes.content}</p>;
+
+	
+	const {
+		headingColor,
+		ContentColor,
+		headingFontSize,
+		contentFontSize,
+		headingPadding,
+		contentPadding,
+		content,
+		heading,
+		headingAlignment,
+		headingToggleOption,
+		contentToggleOption
+	} = props.attributes;
+
+
+	return (
+		<Fragment>
+			<h1 style={{
+					color: headingColor,
+					fontSize: headingFontSize,
+					padding: headingPadding,
+					textAlign: headingAlignment
+				}}> {props.attributes.heading} </h1>
+			<p className={props.className} style={{ color: ContentColor, fontSize: contentFontSize, padding: contentPadding }}>{props.attributes.content}</p>
+		</Fragment>	
+	);
 }
 
 export default save;

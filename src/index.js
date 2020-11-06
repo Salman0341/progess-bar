@@ -37,15 +37,14 @@ registerBlockType("create-block/progress-bar", {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __("Progress Bar", "progress-bar"),
+	title: __("Prog Bar", "progress-bar"),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		"Example block written with ESNext standard and JSX support – build step required.",
-		"progress-bar"
+		"THis is a progress bar module. Each progress bar module in a way of block...."
 	),
 
 	/**
@@ -58,7 +57,7 @@ registerBlockType("create-block/progress-bar", {
 	 * An icon property should be specified to make it easier to identify a block.
 	 * These can be any of WordPress’ Dashicons, or a custom svg element.
 	 */
-	icon: "star-empty",
+	icon: <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M19 13H5v-2h14v2z" /></svg>,
 
 	/**
 	 * Optional block extended support features.
@@ -69,10 +68,65 @@ registerBlockType("create-block/progress-bar", {
 	},
 
 	attributes: {
+		
+		heading: {
+			type: "string",
+			default: "Dummy Headline",
+		},
+
 		content: {
 			type: "string",
 			default: "Hello from the editor!",
 		},
+
+		headingColor: {
+			type: "string",
+			default: "#000",
+		},
+
+		ContentColor: {
+			type: "string",
+			default: "#000",
+		},
+
+		headingFontSize: {
+			type: "number",
+			default: 18
+		},
+
+		contentFontSize: {
+			type: "number",
+			default: 18
+		},
+
+		headingPadding: {
+			type: "number",
+			default: 10
+		},
+
+		contentPadding: {
+			type: "number",
+			default: 10
+		},
+		headingAlignment: {
+			type: "string",
+			default: "center"
+		},
+
+		headingToggleOption: {
+			type: "boolean",
+			default: true
+		},
+
+		contentToggleOption: {
+			type: "boolean",
+			default: true
+		},
+
+		wrapperBgColor: {
+			type: "string",
+			default: "#000"
+		}
 	},
 
 	/**

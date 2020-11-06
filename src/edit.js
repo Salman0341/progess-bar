@@ -3,15 +3,8 @@
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
-import { __ } from "@wordpress/i18n";
-import { Fragment } from "@wordpress/element";
-import { InspectorControls } from "@wordpress/block-editor";
-
-/**
- * Wordpress Components
- */
-
-import { TextareaControl, PanelBody } from "@wordpress/components";
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -19,7 +12,9 @@ import { TextareaControl, PanelBody } from "@wordpress/components";
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import "./editor.scss";
+import './editor.scss';
+
+import Inspector from './Inspector';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -27,28 +22,54 @@ import "./editor.scss";
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit
  *
- * @param {Object} [props]           Properties passed from the editor.
+   * @param {Object} [props]           Properties passed from the editor.
  * @param {string} [props.className] Class name generated for the block.
  *
  * @return {WPElement} Element to render.
  */
 
 function Edit(props) {
+	const {
+		headingColor,
+		ContentColor,
+		headingFontSize,
+		contentFontSize,
+		headingPadding,
+		contentPadding,
+		content,
+		heading,
+		headingAlignment,
+		headingToggleOption,
+		contentToggleOption,
+		wrapperBgColor
+	} = props.attributes;
+	const { className } = props;
+
 	return (
 		<Fragment>
-			<p className={props.className}>{props.attributes.content}</p>
+			<div className="cwp_content_wrap" style={ { textAlign: headingAlignment, backgroundColor: wrapperBgColor} }> 
+			{headingToggleOption && (
+				<h1
+					style={{
+						color: headingColor,
+						fontSize: headingFontSize,
+						padding: headingPadding
+					}}
+				>
+					{heading}
+				</h1>
+			)}
 
-			<InspectorControls>
-				<PanelBody title="General">
-					<TextareaControl
-						label="Content"
-						value={props.attributes.content}
-						onChange={(newContent) =>
-							props.setAttributes({ content: newContent })
-						}
-					/>
-				</PanelBody>
-			</InspectorControls>
+			{contentToggleOption && (
+				<p
+					style={{ color: ContentColor, fontSize: contentFontSize, padding: contentPadding }}
+					className={className}
+				>
+					{content}
+				</p>
+			)}
+			</div>
+			<Inspector {...props} />
 		</Fragment>
 	);
 }
